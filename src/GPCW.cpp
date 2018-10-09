@@ -28,6 +28,8 @@ arma::vec phi0(mcmc_samples); phi0.fill(0);
 arma::vec phi1(mcmc_samples); phi1.fill(0);
 arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0);
 
+int j = 2;
+
 //Initial Values
 beta.col(0) = beta_init;
 theta.col(0) = theta_init;
