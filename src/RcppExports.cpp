@@ -23,8 +23,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // GPCW
-Rcpp::List GPCW(int mcmc_samples, arma::vec y, arma::mat x, arma::mat z, double sigma2_beta, double alpha_phi0, double beta_phi0, double a_phi1, double b_phi1, double mhvar_phi1_trans, arma::vec beta_init, arma::vec theta_init, double phi0_init, double phi1_init, double neg_two_loglike_init);
-RcppExport SEXP _GPCW_GPCW(SEXP mcmc_samplesSEXP, SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP sigma2_betaSEXP, SEXP alpha_phi0SEXP, SEXP beta_phi0SEXP, SEXP a_phi1SEXP, SEXP b_phi1SEXP, SEXP mhvar_phi1_transSEXP, SEXP beta_initSEXP, SEXP theta_initSEXP, SEXP phi0_initSEXP, SEXP phi1_initSEXP, SEXP neg_two_loglike_initSEXP) {
+Rcpp::List GPCW(int mcmc_samples, arma::vec y, arma::mat x, arma::mat z, double sigma2_beta, double alpha_phi0, double beta_phi0, double a_phi1, double b_phi1, double mhvar_phi1_trans, arma::vec beta_init, arma::vec theta_init, double phi0_init, double phi1_init);
+RcppExport SEXP _GPCW_GPCW(SEXP mcmc_samplesSEXP, SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP sigma2_betaSEXP, SEXP alpha_phi0SEXP, SEXP beta_phi0SEXP, SEXP a_phi1SEXP, SEXP b_phi1SEXP, SEXP mhvar_phi1_transSEXP, SEXP beta_initSEXP, SEXP theta_initSEXP, SEXP phi0_initSEXP, SEXP phi1_initSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,8 +42,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type theta_init(theta_initSEXP);
     Rcpp::traits::input_parameter< double >::type phi0_init(phi0_initSEXP);
     Rcpp::traits::input_parameter< double >::type phi1_init(phi1_initSEXP);
-    Rcpp::traits::input_parameter< double >::type neg_two_loglike_init(neg_two_loglike_initSEXP);
-    rcpp_result_gen = Rcpp::wrap(GPCW(mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init, neg_two_loglike_init));
+    rcpp_result_gen = Rcpp::wrap(GPCW(mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -153,7 +152,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_GPCW_beta_update", (DL_FUNC) &_GPCW_beta_update, 6},
-    {"_GPCW_GPCW", (DL_FUNC) &_GPCW_GPCW, 15},
+    {"_GPCW_GPCW", (DL_FUNC) &_GPCW_GPCW, 14},
     {"_GPCW_neg_two_loglike_update", (DL_FUNC) &_GPCW_neg_two_loglike_update, 5},
     {"_GPCW_phi0_update", (DL_FUNC) &_GPCW_phi0_update, 4},
     {"_GPCW_phi1_update", (DL_FUNC) &_GPCW_phi1_update, 8},

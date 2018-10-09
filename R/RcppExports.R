@@ -5,8 +5,8 @@ beta_update <- function(x, z, sigma2_beta, w, gamma, theta_old) {
     .Call(`_GPCW_beta_update`, x, z, sigma2_beta, w, gamma, theta_old)
 }
 
-GPCW <- function(mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init, neg_two_loglike_init) {
-    .Call(`_GPCW_GPCW`, mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init, neg_two_loglike_init)
+GPCW <- function(mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init) {
+    .Call(`_GPCW_GPCW`, mcmc_samples, y, x, z, sigma2_beta, alpha_phi0, beta_phi0, a_phi1, b_phi1, mhvar_phi1_trans, beta_init, theta_init, phi0_init, phi1_init)
 }
 
 neg_two_loglike_update <- function(y, x, z, beta, theta) {

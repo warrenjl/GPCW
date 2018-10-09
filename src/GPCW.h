@@ -61,7 +61,6 @@ Rcpp::List GPCW(int mcmc_samples,
                 arma::vec beta_init,
                 arma::vec theta_init,
                 double phi0_init,
-                double phi1_init,
-                double neg_two_loglike_init); 
+                double phi1_init); 
 
 #endif // __GPCW__
