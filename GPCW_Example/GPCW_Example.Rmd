@@ -1,0 +1,85 @@
+---
+title: "GPCW_Example"
+author: "Joshua L. Warren"
+date: "October 13, 2018"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##GPCW_Example
+
+[1]  Simulate data from the proposed model:
+
+```{r}
+#####################
+#Reproducability Seed
+#####################
+set.seed(78453)
+
+###############
+#Packages
+###############
+library(GPCW)
+library(mnormt)
+library(boot)
+
+################################################
+#Data Settings
+################################################
+n<-10000
+m<-36
+x<-matrix(1, 
+          nrow=n, 
+          ncol=1)
+z<-matrix(rnorm(n=(n*m)), 
+          nrow=n, 
+          ncol=m)
+
+#Standardizing the Exposures at Each Time Period
+for(j in 1:m){
+   z[,j]<-(z[,j] - median(z[,j]))/IQR(z[,j])
+   }
+
+#################################################
+#True Parameter Values
+##################################################
+beta_true<- -0.30
+phi0_true<-0.50
+phi1_true<-0.10
+Sigma<-phi0_true*temporal_corr_fun(m, 
+                                   phi1_true)[[1]]
+theta_true<-c(rmnorm(n=1, 
+                     mean=rep(0, times=m), 
+                     varcov=Sigma))
+logit_p<-x%*%beta_true + 
+         z%*%theta_true
+probs<-inv.logit(logit_p)
+
+#####################
+#Simulated Response
+#####################
+y<-rbinom(n=n, 
+          size=1, 
+          prob=probs)
+```
+
+[2]  Fit GPCW to Estimate Critical Windows of Susceptibility:
+
+```{r include=FALSE}
+results<-GPCW(mcmc_samples = 1000,
+              y = y, x = x, z = z,
+              mhvar_phi1_trans = 1.15)
+```
+
+[3]  Analyzing Output:
+
+```{r}
+plot(rowMeans(results$theta), pch=16)
+points(theta_true, pch=16, col="blue")
+```

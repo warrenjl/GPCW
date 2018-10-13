@@ -13,7 +13,7 @@ Rcpp::List phi1_update(double phi1_old,
                        double a_phi1,
                        double b_phi1,
                        double mhvar_phi1_trans,
-                       int acctot_phi1_trans){
+                       double acctot_phi1_trans){
 
 /*Second*/
 Rcpp::List temporal_corr_info_old = temporal_corr_info;

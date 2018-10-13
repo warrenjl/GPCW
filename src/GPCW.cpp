@@ -10,16 +10,16 @@ Rcpp::List GPCW(int mcmc_samples,
                 arma::vec y,
                 arma::mat x,
                 arma::mat z,
-                double sigma2_beta,
-                double alpha_phi0,
-                double beta_phi0,
-                double a_phi1,
-                double b_phi1,
                 double mhvar_phi1_trans,
-                arma::vec beta_init,
-                arma::vec theta_init,
-                double phi0_init,
-                double phi1_init){
+                Rcpp::Nullable<double> sigma2_beta_prior = R_NilValue,
+                Rcpp::Nullable<double> a_phi0_prior = R_NilValue,
+                Rcpp::Nullable<double> b_phi0_prior = R_NilValue,
+                Rcpp::Nullable<double> a_phi1_prior = R_NilValue,
+                Rcpp::Nullable<double> b_phi1_prior = R_NilValue,
+                Rcpp::Nullable<Rcpp::NumericVector> beta_init = R_NilValue,
+                Rcpp::Nullable<Rcpp::NumericVector> theta_init = R_NilValue,
+                Rcpp::Nullable<double> phi0_init = R_NilValue,
+                Rcpp::Nullable<double> phi1_init = R_NilValue){
 
 //Defining Parameters and Quantities of Interest
 arma::mat beta(x.n_cols, mcmc_samples); beta.fill(0);
@@ -28,11 +28,53 @@ arma::vec phi0(mcmc_samples); phi0.fill(0);
 arma::vec phi1(mcmc_samples); phi1.fill(0);
 arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0);
 
+//Prior Information
+double sigma2_beta = 10000;
+if(sigma2_beta_prior.isNotNull()){
+  sigma2_beta = Rcpp::as<double>(sigma2_beta_prior);
+  }
+
+double a_phi0 = 3.00;
+if(a_phi0_prior.isNotNull()){
+  a_phi0 = Rcpp::as<double>(a_phi0_prior);
+  }
+  
+double b_phi0 = 2.00;
+if(b_phi0_prior.isNotNull()){
+  b_phi0 = Rcpp::as<double>(b_phi0_prior);
+  }
+
+double a_phi1 = log(0.9999)/(-(z.n_cols - 1));
+if(a_phi1_prior.isNotNull()){
+  a_phi1 = Rcpp::as<double>(a_phi1_prior);
+  }
+  
+double b_phi1 = log(0.0001)/(-1);
+if(b_phi1_prior.isNotNull()){
+  b_phi1 = Rcpp::as<double>(b_phi1_prior);
+  }
+
 //Initial Values
-beta.col(0) = beta_init;
-theta.col(0) = theta_init;
-phi0(0) = phi0_init;
-phi1(0) = phi1_init;
+beta.col(0).fill(0);
+if(beta_init.isNotNull()){
+  beta.col(0) = Rcpp::as<arma::vec>(beta_init);
+  }
+
+theta.col(0).fill(0);
+if(theta_init.isNotNull()){
+  theta.col(0) = Rcpp::as<arma::vec>(theta_init);
+  }
+
+phi0(0) = 0.25;
+if(phi0_init.isNotNull()){
+  phi0(0) = Rcpp::as<double>(phi0_init);
+  }
+
+phi1(0) = 0.01;
+if(phi1_init.isNotNull()){
+  phi1(0) = Rcpp::as<double>(phi1_init);
+  }
+
 Rcpp::List temporal_corr_info = temporal_corr_fun(z.n_cols, phi1(0));
 neg_two_loglike(0) = neg_two_loglike_update(y,
                                             x,
@@ -43,6 +85,7 @@ neg_two_loglike(0) = neg_two_loglike_update(y,
 //Metropolis Settings
 double acctot_phi1_trans = 0;
 
+//Main Sampling Loop
 for(int j = 1; j < mcmc_samples; ++j){
   
   //w Update
@@ -72,8 +115,8 @@ for(int j = 1; j < mcmc_samples; ++j){
                               temporal_corr_info(0));
 
   //phi0 Update
-  phi0(j) = phi0_update(alpha_phi0,
-                        beta_phi0,
+  phi0(j) = phi0_update(a_phi0,
+                        b_phi0,
                         theta.col(j),
                         temporal_corr_info(0));
   
@@ -86,6 +129,7 @@ for(int j = 1; j < mcmc_samples; ++j){
                                        b_phi1,
                                        mhvar_phi1_trans,
                                        acctot_phi1_trans);
+
   phi1(j) = phi1_output(0);
   acctot_phi1_trans = phi1_output(1);
   temporal_corr_info = phi1_output(2);
