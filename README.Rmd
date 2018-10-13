@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 GPCW: Gaussian Process for Estimating Crtical Windows of Susceptibility
 
 ##Statistical Model
@@ -22,7 +27,7 @@ $\sigma^2_{\theta} \sim \text{Inverse Gamma}\left(\alpha, \beta\right)$
 
 $\phi \sim \text{Uniform}\left(a_{\phi}, b_{\phi}\right)$
 
-* Default setting: $a_{\phi} = $, $b_{\phi} = $
+* Default setting: $a_{\phi} = d$, $b_{\phi} = d$
 
 ##Default Initial Values
 $\beta_j = 0$ for all $j$
