@@ -5,32 +5,32 @@ beta_update <- function(x, z, sigma2_beta, w, gamma, theta_old) {
     .Call(`_GPCW_beta_update`, x, z, sigma2_beta, w, gamma, theta_old)
 }
 
-GPCW <- function(mcmc_samples, y, x, z, mhvar_phi1_trans, sigma2_beta_prior = NULL, a_phi0_prior = NULL, b_phi0_prior = NULL, a_phi1_prior = NULL, b_phi1_prior = NULL, beta_init = NULL, theta_init = NULL, phi0_init = NULL, phi1_init = NULL) {
-    .Call(`_GPCW_GPCW`, mcmc_samples, y, x, z, mhvar_phi1_trans, sigma2_beta_prior, a_phi0_prior, b_phi0_prior, a_phi1_prior, b_phi1_prior, beta_init, theta_init, phi0_init, phi1_init)
+GPCW <- function(mcmc_samples, y, x, z, mhvar_phi_trans, sigma2_beta_prior = NULL, a_sigma2_theta_prior = NULL, b_sigma2_theta_prior = NULL, a_phi_prior = NULL, b_phi_prior = NULL, beta_init = NULL, theta_init = NULL, sigma2_theta_init = NULL, phi_init = NULL) {
+    .Call(`_GPCW_GPCW`, mcmc_samples, y, x, z, mhvar_phi_trans, sigma2_beta_prior, a_sigma2_theta_prior, b_sigma2_theta_prior, a_phi_prior, b_phi_prior, beta_init, theta_init, sigma2_theta_init, phi_init)
 }
 
 neg_two_loglike_update <- function(y, x, z, beta, theta) {
     .Call(`_GPCW_neg_two_loglike_update`, y, x, z, beta, theta)
 }
 
-phi0_update <- function(a_phi0, b_phi0, theta, corr_inv) {
-    .Call(`_GPCW_phi0_update`, a_phi0, b_phi0, theta, corr_inv)
-}
-
-phi1_update <- function(phi1_old, phi0, theta, temporal_corr_info, a_phi1, b_phi1, mhvar_phi1_trans, acctot_phi1_trans) {
-    .Call(`_GPCW_phi1_update`, phi1_old, phi0, theta, temporal_corr_info, a_phi1, b_phi1, mhvar_phi1_trans, acctot_phi1_trans)
+phi_update <- function(phi_old, sigma2_theta, theta, temporal_corr_info, a_phi, b_phi, mhvar_phi_trans, acctot_phi_trans) {
+    .Call(`_GPCW_phi_update`, phi_old, sigma2_theta, theta, temporal_corr_info, a_phi, b_phi, mhvar_phi_trans, acctot_phi_trans)
 }
 
 rcpp_pgdraw <- function(b, c) {
     .Call(`_GPCW_rcpp_pgdraw`, b, c)
 }
 
-temporal_corr_fun <- function(p_z, phi1) {
-    .Call(`_GPCW_temporal_corr_fun`, p_z, phi1)
+sigma2_theta_update <- function(a_sigma2_theta, b_sigma2_theta, theta, corr_inv) {
+    .Call(`_GPCW_sigma2_theta_update`, a_sigma2_theta, b_sigma2_theta, theta, corr_inv)
 }
 
-theta_update <- function(x, z, w, gamma, beta, phi0_old, corr_inv) {
-    .Call(`_GPCW_theta_update`, x, z, w, gamma, beta, phi0_old, corr_inv)
+temporal_corr_fun <- function(p_z, phi) {
+    .Call(`_GPCW_temporal_corr_fun`, p_z, phi)
+}
+
+theta_update <- function(x, z, w, gamma, beta, sigma2_theta_old, corr_inv) {
+    .Call(`_GPCW_theta_update`, x, z, w, gamma, beta, sigma2_theta_old, corr_inv)
 }
 
 w_update <- function(y, x, z, beta_old, theta_old) {

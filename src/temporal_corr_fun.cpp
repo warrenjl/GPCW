@@ -7,14 +7,14 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 
 Rcpp::List temporal_corr_fun(int p_z,
-                             double phi1){
+                             double phi){
 
 double log_deter = 0; 
 double sign = 0;     
 arma::mat temporal_corr(p_z, p_z);
 for(int j = 0; j < p_z; ++j){
    for(int k = 0; k < p_z; ++k){
-      temporal_corr(j,k) = exp(-phi1*abs(j - k));
+      temporal_corr(j,k) = exp(-phi*abs(j - k));
       }
    }
 

@@ -11,7 +11,7 @@ arma::vec theta_update(arma::mat x,
                        arma::vec w,
                        arma::vec gamma,
                        arma::vec beta,
-                       double phi0_old,
+                       double sigma2_theta_old,
                        arma::mat corr_inv){
 
 int p_z = z.n_cols;
@@ -24,7 +24,7 @@ for(int j = 0; j < p_z; ++j){
 arma::mat z_trans = trans(z);
 
 arma::mat cov_theta = inv_sympd(z_trans*(w_mat%z) + 
-                                (1/phi0_old)*corr_inv);
+                                (1/sigma2_theta_old)*corr_inv);
 
 arma::vec mean_theta = cov_theta*(z_trans*(w%(gamma - x*beta)));
 
