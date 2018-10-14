@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
 
 ## Statistical Model

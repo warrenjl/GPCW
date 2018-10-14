@@ -12,7 +12,7 @@ Rcpp::List phi_update(double phi_old,
                       Rcpp::List temporal_corr_info,
                       double a_phi,
                       double b_phi,
-                      double mhvar_phi_trans,
+                      double metrop_var_phi_trans,
                       double acctot_phi_trans){
 
 /*Second*/
@@ -28,7 +28,7 @@ double second = -0.50*log_deter_old -
 
 /*First*/
 double phi_trans = R::rnorm(phi_trans_old, 
-                            sqrt(mhvar_phi_trans));
+                            sqrt(metrop_var_phi_trans));
 double phi = (b_phi*exp(phi_trans) + a_phi)/(exp(phi_trans) + 1);
 temporal_corr_info = temporal_corr_fun(theta.size(), phi);
 arma::mat corr_inv = temporal_corr_info[0];

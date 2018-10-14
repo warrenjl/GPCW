@@ -10,7 +10,7 @@ Rcpp::List GPCW(int mcmc_samples,
                 arma::vec y,
                 arma::mat x,
                 arma::mat z,
-                double mhvar_phi_trans,
+                double metrop_var_phi_trans,
                 Rcpp::Nullable<double> sigma2_beta_prior = R_NilValue,
                 Rcpp::Nullable<double> a_sigma2_theta_prior = R_NilValue,
                 Rcpp::Nullable<double> b_sigma2_theta_prior = R_NilValue,
@@ -127,7 +127,7 @@ for(int j = 1; j < mcmc_samples; ++j){
                                      temporal_corr_info,
                                      a_phi,
                                      b_phi,
-                                     mhvar_phi_trans,
+                                     metrop_var_phi_trans,
                                      acctot_phi_trans);
 
   phi(j) = phi_output(0);

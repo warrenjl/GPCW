@@ -1,80 +1,71 @@
 ---
-title: "GPCW_Example"
-author: "Joshua L. Warren"
-date: "October 13, 2018"
 output:
   pdf_document: default
-  word_document: default
   html_document: default
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# GPCW: Gaussian Process for Estimating Crtical Windows of Susceptibility
 
-##GPCW_Example
+## GPCW_Example
 
-[1]  Simulate data from the proposed model:
+[1] Simulate data from the proposed model:
 
+* Setting the reproducability seed and initializing packages for data simulation: 
 ```{r}
-#####################
-#Reproducability Seed
-#####################
 set.seed(78453)
 
-###############
-#Packages
-###############
-library(GPCW)
+library(GPCW)  
 library(mnormt)
 library(boot)
+```
 
-################################################
-#Data Settings
-################################################
-n<-10000
-m<-36
+* Setting the global data values
+```{r}
+n<-10000  #Sample size
+m<-36  #Number of exposure time periods
 x<-matrix(1, 
           nrow=n, 
-          ncol=1)
+          ncol=1)  #Covariate design matrix
 z<-matrix(rnorm(n=(n*m)), 
           nrow=n, 
-          ncol=m)
+          ncol=m)  #Exposure design matrix
 
-#Standardizing the Exposures at Each Time Period
 for(j in 1:m){
-   z[,j]<-(z[,j] - median(z[,j]))/IQR(z[,j])
+   z[,j]<-(z[,j] - median(z[,j]))/IQR(z[,j])  #Data standardization (interquartile range)
    }
+```
 
-#################################################
-#True Parameter Values
-##################################################
+* Setting the values for the statistical model parameters
+```{r}
 beta_true<- -0.30
-phi0_true<-0.50
-phi1_true<-0.10
-Sigma<-phi0_true*temporal_corr_fun(m, 
-                                   phi1_true)[[1]]
+sigma2_theta_true<-0.50
+phi_true<-0.01
+Sigma<-sigma2_theta_true*temporal_corr_fun(m, 
+                                           phi_true)[[1]]
 theta_true<-c(rmnorm(n=1, 
                      mean=rep(0, times=m), 
                      varcov=Sigma))
 logit_p<-x%*%beta_true + 
          z%*%theta_true
 probs<-inv.logit(logit_p)
+```
 
-#####################
-#Simulated Response
-#####################
+* Simulating the analysis dataset
+
+```{r}
 y<-rbinom(n=n, 
           size=1, 
           prob=probs)
 ```
 
-[2]  Fit GPCW to Estimate Critical Windows of Susceptibility:
+[2] Fit GPCW to Estimate Critical Windows of Susceptibility:
 
 ```{r include=FALSE}
 results<-GPCW(mcmc_samples = 1000,
               y = y, x = x, z = z,
-              mhvar_phi1_trans = 1.15)
+              mhvar_phi_trans = 1.15)
 ```
 
 [3]  Analyzing Output:
