@@ -1,6 +1,6 @@
 # GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
 
-##Statistical Model
+## Statistical Model
 $$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{iid}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;$$
 
 $$\log\left(\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right) = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);$$
@@ -11,7 +11,7 @@ $$\boldsymbol{\theta}=\left(\theta\left(1\right), ..., \theta\left(m\right)\righ
 
 * $\boldsymbol{0}_m$: Length $m$ vector with each entry equal to zero.
 
-##Prior Information
+## Prior Information
 $\beta_j \stackrel{\text{iid}}{\sim}\text{N}\left(0, \sigma^2_{\beta}\right),\ j=1,...,p;$
 
 * $p$: Length of $\textbf{x}_i$ vector (same for all $i$);
@@ -26,7 +26,7 @@ $\phi \sim \text{Uniform}\left(a_{\phi}, b_{\phi}\right);$
 
 * Default setting: $a_{\phi} = \log(0.9999)/(-(m-1))$, $b_{\phi} = \log(0.0001)/(-1).$
 
-##Default Initial Values
+## Default Initial Values
 * $\beta_j = 0$ for all $j$;
 
 * $\theta_j = 0$ for all $j$;
