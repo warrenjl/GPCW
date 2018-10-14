@@ -1,4 +1,4 @@
-#GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
+# GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
 
 ##Statistical Model
 $$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{iid}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;$$
