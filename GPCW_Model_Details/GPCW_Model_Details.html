@@ -128,7 +128,7 @@ $(document).ready(function () {
 <h1>GPCW: Gaussian Process Model for Critical Window Estimation</h1>
 <div id="statistical-model" class="section level2">
 <h2>Statistical Model</h2>
-<p><span class="math display">\[y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{iid}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;\]</span></p>
+<p><span class="math display">\[y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;\]</span></p>
 <p><span class="math display">\[\log\left(\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right) = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);\]</span></p>
 <p><span class="math display">\[\boldsymbol{\theta}=\left(\theta\left(1\right), ..., \theta\left(m\right)\right)^{\text{T}}| \sigma^2_{\theta}, \phi \sim \text{MVN}\left(\boldsymbol{0}_m, \sigma^2_{\theta}\Sigma\left(\phi\right)\right);\]</span></p>
 <p><span class="math display">\[\Sigma\left(\phi\right)_{ij} = \exp\left\{-\phi |i-j|\right\},\ \phi &gt; 0.\]</span></p>

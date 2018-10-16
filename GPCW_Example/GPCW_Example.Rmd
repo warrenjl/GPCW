@@ -1,5 +1,6 @@
 ---
 output:
+  word_document: default
   pdf_document: default
   html_document: default
 ---
@@ -54,7 +55,7 @@ probs_true<-inv.logit(logit_p_true)
 hist(probs_true)
 ```
 
-* Simulating the analysis dataset
+* Simulating the analysis dataset:
 ```{r}
 y<-rbinom(n=n, 
           size=1, 
