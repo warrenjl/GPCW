@@ -1,9 +1,10 @@
 ---
 output:
   pdf_document: default
+  word_document: default
   html_document: default
 ---
-# GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
+# GPCW: Gaussian Process Model for Critical Window Estimation
 
 ## Statistical Model
 $$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{iid}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;$$

@@ -124,13 +124,14 @@ $(document).ready(function () {
 </div>
 
 
-<div id="gpcw-gaussian-process-for-estimating-critical-windows-of-susceptibility" class="section level1">
-<h1>GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility</h1>
+<div id="gpcw-gaussian-process-model-for-critical-window-estimation" class="section level1">
+<h1>GPCW: Gaussian Process Model for Critical Window Estimation</h1>
 <div id="statistical-model" class="section level2">
 <h2>Statistical Model</h2>
 <p><span class="math display">\[y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{iid}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;\]</span></p>
 <p><span class="math display">\[\log\left(\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right) = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);\]</span></p>
-<p><span class="math display">\[\boldsymbol{\theta}=\left(\theta\left(1\right), ..., \theta\left(m\right)\right)^{\text{T}}| \sigma^2_{\theta}, \phi \sim \text{MVN}\left(\boldsymbol{0}_m, \sigma^2_{\theta}\Sigma\left(\phi\right)\right).\]</span></p>
+<p><span class="math display">\[\boldsymbol{\theta}=\left(\theta\left(1\right), ..., \theta\left(m\right)\right)^{\text{T}}| \sigma^2_{\theta}, \phi \sim \text{MVN}\left(\boldsymbol{0}_m, \sigma^2_{\theta}\Sigma\left(\phi\right)\right);\]</span></p>
+<p><span class="math display">\[\Sigma\left(\phi\right)_{ij} = \exp\left\{-\phi |i-j|\right\},\ \phi &gt; 0.\]</span></p>
 <ul>
 <li><p><span class="math inline">\(m = \max\left\{m_i: i=1,...,n\right\};\)</span></p></li>
 <li><p><span class="math inline">\(\boldsymbol{0}_m\)</span>: Length <span class="math inline">\(m\)</span> vector with each entry equal to zero.</p></li>
@@ -143,9 +144,9 @@ $(document).ready(function () {
 <li><p><span class="math inline">\(p\)</span>: Length of <span class="math inline">\(\textbf{x}_i\)</span> vector (same for all <span class="math inline">\(i\)</span>);</p></li>
 <li><p>Default setting: <span class="math inline">\(\sigma^2_{\beta} = 10,000.\)</span></p></li>
 </ul>
-<p><span class="math inline">\(\sigma^2_{\theta} \sim \text{Inverse Gamma}\left(\alpha, \beta\right);\)</span></p>
+<p><span class="math inline">\(\sigma^2_{\theta} \sim \text{Inverse Gamma}\left(a_{\sigma^2_{\theta}}, b_{\sigma^2_{\theta}}\right);\)</span></p>
 <ul>
-<li>Default setting: <span class="math inline">\(\alpha = 3\)</span>, <span class="math inline">\(\beta = 2.\)</span></li>
+<li>Default setting: <span class="math inline">\(a_{\sigma^2_{\theta}} = 3\)</span>, <span class="math inline">\(b_{\sigma^2_{\theta}} = 2.\)</span></li>
 </ul>
 <p><span class="math inline">\(\phi \sim \text{Uniform}\left(a_{\phi}, b_{\phi}\right);\)</span></p>
 <ul>

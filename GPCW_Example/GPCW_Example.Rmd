@@ -6,7 +6,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
+# GPCW: Gaussian Process Model for Critical Window Estimation
 
 ## GPCW_Example
 
