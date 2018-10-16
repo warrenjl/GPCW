@@ -65,12 +65,12 @@ if(theta_init.isNotNull()){
   theta.col(0) = Rcpp::as<arma::vec>(theta_init);
   }
 
-sigma2_theta(0) = 0.25;
+sigma2_theta(0) = 1.00;
 if(sigma2_theta_init.isNotNull()){
   sigma2_theta(0) = Rcpp::as<double>(sigma2_theta_init);
   }
 
-phi(0) = 0.01;
+phi(0) = 1.00;
 if(phi_init.isNotNull()){
   phi(0) = Rcpp::as<double>(phi_init);
   }
@@ -142,16 +142,16 @@ for(int j = 1; j < mcmc_samples; ++j){
                                               theta.col(j));
   
   //Progress
-  if(j % 10 == 0){ 
+  if((j + 1) % 10 == 0){ 
     Rcpp::checkUserInterrupt();
     }
   
-  if(j % int(round(mcmc_samples*0.02)) == 0){
+  if(((j + 1) % int(round(mcmc_samples*0.10)) == 0)){
     double completion = round(100*(j/(double)mcmc_samples));
     Rcpp::Rcout << "Progress: " << completion << "%" << std::endl;
     double accrate_phi_trans = round(100*(acctot_phi_trans/j));
     Rcpp::Rcout << "phi Acceptance: " << accrate_phi_trans << "%" << std::endl;
-    Rcpp::Rcout << "********************" << std::endl;
+    Rcpp::Rcout << "*******************" << std::endl;
     }
   
   }

@@ -1,29 +1,24 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# GPCW: Gaussian Process for Estimating Crtical Windows of Susceptibility
+# GPCW: Gaussian Process for Estimating Critical Windows of Susceptibility
 
 ## GPCW_Example
 
 [1] Simulate data from the proposed model:
 
-* Setting the reproducability seed and initializing packages for data simulation: 
+* Setting the reproducibility seed and initializing packages for data simulation: 
 ```{r}
-set.seed(78453)
+set.seed(8453)
 
 library(GPCW)  
-library(mnormt)
-library(boot)
+library(mnormt)  #Multivariate normal distribution
+library(boot)  #Inverse logit transformation
 ```
 
-* Setting the global data values
+* Setting the global data values:
 ```{r}
-n<-10000  #Sample size
+n<-5000  #Sample size
 m<-36  #Number of exposure time periods
 x<-matrix(1, 
           nrow=n, 
@@ -37,40 +32,68 @@ for(j in 1:m){
    }
 ```
 
-* Setting the values for the statistical model parameters
+* Setting the values for the statistical model parameters:
 ```{r}
 beta_true<- -0.30
 sigma2_theta_true<-0.50
 phi_true<-0.01
-Sigma<-sigma2_theta_true*temporal_corr_fun(m, 
-                                           phi_true)[[1]]
-theta_true<-c(rmnorm(n=1, 
-                     mean=rep(0, times=m), 
-                     varcov=Sigma))
-logit_p<-x%*%beta_true + 
-         z%*%theta_true
-probs<-inv.logit(logit_p)
+Sigma_true<-sigma2_theta_true*chol2inv(chol(temporal_corr_fun(m, 
+                                                              phi_true)[[1]]))
+theta_true<-rmnorm(n=1, 
+                   mean=rep(0, times=m), 
+                   varcov=Sigma_true)
+theta_true<-theta_true - mean(theta_true)
+logit_p_true<-x%*%beta_true + 
+              z%*%theta_true
+probs_true<-inv.logit(logit_p_true)
+hist(probs_true)
 ```
 
 * Simulating the analysis dataset
-
 ```{r}
 y<-rbinom(n=n, 
           size=1, 
-          prob=probs)
+          prob=probs_true)
 ```
 
-[2] Fit GPCW to Estimate Critical Windows of Susceptibility:
+[2] Fit GPCW to estimate critical windows of susceptibility:
 
-```{r include=FALSE}
-results<-GPCW(mcmc_samples = 1000,
+```{r echo=TRUE}
+results<-GPCW(mcmc_samples = 10000,
               y = y, x = x, z = z,
-              mhvar_phi_trans = 1.15)
+              metrop_var_phi_trans = 1.15)
 ```
 
 [3]  Analyzing Output:
 
 ```{r}
-plot(rowMeans(results$theta), pch=16)
-points(theta_true, pch=16, col="blue")
+par(mfrow=c(2,2))
+plot(results$beta[1, 1001:10000], 
+     type="l",
+     ylab="beta",
+     xlab="Sample")
+abline(h=beta_true,
+       col="red",
+       lwd=2)  #True value
+plot(results$sigma2_theta[1001:10000],
+     type="l",
+     ylab="sigma2_theta",
+     xlab="Sample")
+abline(h=sigma2_theta_true,
+       col="red",
+       lwd=2)  #True value
+plot(results$phi[1001:10000],
+     type="l",
+     ylab="phi",
+     xlab="Sample")
+abline(h=phi_true, 
+       col="red",
+       lwd=2)  #True value
+plot(rowMeans(results$theta[,1001:10000]), 
+     pch=16,
+     ylab="theta",
+     xlab="Time")
+points(theta_true, 
+       pch=16, 
+       col="red")  #True values
 ```
