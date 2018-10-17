@@ -130,9 +130,9 @@ for(int j = 1; j < mcmc_samples; ++j){
                                      metrop_var_phi_trans,
                                      acctot_phi_trans);
 
-  phi(j) = phi_output(0);
-  acctot_phi_trans = phi_output(1);
-  temporal_corr_info = phi_output(2);
+  phi(j) = phi_output[0];
+  acctot_phi_trans = phi_output[1];
+  temporal_corr_info = phi_output[2];
 
   //neg_two_loglike Update
   neg_two_loglike(j) = neg_two_loglike_update(y,
