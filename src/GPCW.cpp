@@ -29,7 +29,7 @@ arma::vec phi(mcmc_samples); phi.fill(0.00);
 arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0.00);
 
 //Prior Information
-double sigma2_beta = 10000;
+double sigma2_beta = 10000.00;
 if(sigma2_beta_prior.isNotNull()){
   sigma2_beta = Rcpp::as<double>(sigma2_beta_prior);
   }
