@@ -23,7 +23,7 @@ for(int j = 0; j < p_x; ++j){
 arma::mat x_trans = trans(x);
 
 arma::mat cov_beta = inv_sympd(x_trans*(w_mat%x) + 
-                               (1/sigma2_beta)*eye(p_x, p_x));
+                               (1.00/sigma2_beta)*eye(p_x, p_x));
 
 arma::vec mean_beta = cov_beta*(x_trans*(w%(gamma - z*theta_old)));
 

@@ -40,7 +40,7 @@ Rcpp::List phi_update(double phi_old,
                       double a_phi,
                       double b_phi,
                       double metrop_var_phi_trans,
-                      double acctot_phi_trans);
+                      int acctot_phi_trans);
 
 double neg_two_loglike_update(arma::vec y,
                               arma::mat x,

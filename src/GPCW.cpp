@@ -22,11 +22,11 @@ Rcpp::List GPCW(int mcmc_samples,
                 Rcpp::Nullable<double> phi_init = R_NilValue){
 
 //Defining Parameters and Quantities of Interest
-arma::mat beta(x.n_cols, mcmc_samples); beta.fill(0);
-arma::mat theta(z.n_cols, mcmc_samples); theta.fill(0);
-arma::vec sigma2_theta(mcmc_samples); sigma2_theta.fill(0);
-arma::vec phi(mcmc_samples); phi.fill(0);
-arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0);
+arma::mat beta(x.n_cols, mcmc_samples); beta.fill(0.00);
+arma::mat theta(z.n_cols, mcmc_samples); theta.fill(0.00);
+arma::vec sigma2_theta(mcmc_samples); sigma2_theta.fill(0.00);
+arma::vec phi(mcmc_samples); phi.fill(0.00);
+arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0.00);
 
 //Prior Information
 double sigma2_beta = 10000;
@@ -44,23 +44,23 @@ if(b_sigma2_theta_prior.isNotNull()){
   b_sigma2_theta = Rcpp::as<double>(b_sigma2_theta_prior);
   }
 
-double a_phi = log(0.9999)/(-(z.n_cols - 1));
+double a_phi = log(0.9999)/(-(z.n_cols - 1.00));
 if(a_phi_prior.isNotNull()){
   a_phi = Rcpp::as<double>(a_phi_prior);
   }
   
-double b_phi = log(0.0001)/(-1);
+double b_phi = log(0.0001)/(-1.00);
 if(b_phi_prior.isNotNull()){
   b_phi = Rcpp::as<double>(b_phi_prior);
   }
 
 //Initial Values
-beta.col(0).fill(0);
+beta.col(0).fill(0.00);
 if(beta_init.isNotNull()){
   beta.col(0) = Rcpp::as<arma::vec>(beta_init);
   }
 
-theta.col(0).fill(0);
+theta.col(0).fill(0.00);
 if(theta_init.isNotNull()){
   theta.col(0) = Rcpp::as<arma::vec>(theta_init);
   }
@@ -83,7 +83,7 @@ neg_two_loglike(0) = neg_two_loglike_update(y,
                                             theta.col(0));
 
 //Metropolis Settings
-double acctot_phi_trans = 0;
+int acctot_phi_trans = 0;
 
 //Main Sampling Loop
 for(int j = 1; j < mcmc_samples; ++j){
@@ -149,7 +149,7 @@ for(int j = 1; j < mcmc_samples; ++j){
   if(((j + 1) % int(round(mcmc_samples*0.10)) == 0)){
     double completion = round(100*((j + 1)/(double)mcmc_samples));
     Rcpp::Rcout << "Progress: " << completion << "%" << std::endl;
-    double accrate_phi_trans = round(100*(acctot_phi_trans/j));
+    double accrate_phi_trans = round(100*(acctot_phi_trans/(double)j));
     Rcpp::Rcout << "phi Acceptance: " << accrate_phi_trans << "%" << std::endl;
     Rcpp::Rcout << "*******************" << std::endl;
     }
