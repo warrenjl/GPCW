@@ -70,11 +70,7 @@ if(sigma2_theta_init.isNotNull()){
   sigma2_theta(0) = Rcpp::as<double>(sigma2_theta_init);
   }
 
-<<<<<<< HEAD
 phi(0) = (b_phi - a_phi)*0.01;
-=======
-phi(0) = (b_phi - a_phi)*0.50;
->>>>>>> 74dede1d1cd45752ef0317788068f6466d9bdcd3
 if(phi_init.isNotNull()){
   phi(0) = Rcpp::as<double>(phi_init);
   }
