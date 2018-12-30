@@ -1,7 +1,7 @@
 ---
 output:
-  word_document: default
   pdf_document: default
+  word_document: default
   html_document: default
 ---
 # GPCW: Gaussian Process Model for Critical Window Estimation
@@ -41,5 +41,5 @@ $\phi \sim \text{Uniform}\left(a_{\phi}, b_{\phi}\right);$
 
 * $\sigma^2_{\theta} = 1.00$;
 
-* $\phi = 1.00$.
+* $\phi = 0.01\left(b_{\phi} - a_{\phi}\right)$.
 
