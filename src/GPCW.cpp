@@ -22,8 +22,10 @@ Rcpp::List GPCW(int mcmc_samples,
                 Rcpp::Nullable<double> phi_init = R_NilValue){
 
 //Defining Parameters and Quantities of Interest
-arma::mat beta(x.n_cols, mcmc_samples); beta.fill(0.00);
-arma::mat theta(z.n_cols, mcmc_samples); theta.fill(0.00);
+int p_x = x.n_cols;
+int p_z = z.n_cols;
+arma::mat beta(p_x, mcmc_samples); beta.fill(0.00);
+arma::mat theta(p_z, mcmc_samples); theta.fill(0.00);
 arma::vec sigma2_theta(mcmc_samples); sigma2_theta.fill(0.00);
 arma::vec phi(mcmc_samples); phi.fill(0.00);
 arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0.00);
@@ -44,7 +46,7 @@ if(b_sigma2_theta_prior.isNotNull()){
   b_sigma2_theta = Rcpp::as<double>(b_sigma2_theta_prior);
   }
 
-double a_phi = log(0.9999)/(-(z.n_cols - 1.00));
+double a_phi = log(0.9999)/(-(p_z - 1.00));
 if(a_phi_prior.isNotNull()){
   a_phi = Rcpp::as<double>(a_phi_prior);
   }
@@ -75,7 +77,7 @@ if(phi_init.isNotNull()){
   phi(0) = Rcpp::as<double>(phi_init);
   }
 
-Rcpp::List temporal_corr_info = temporal_corr_fun(z.n_cols, phi(0));
+Rcpp::List temporal_corr_info = temporal_corr_fun(p_z, phi(0));
 neg_two_loglike(0) = neg_two_loglike_update(y,
                                             x,
                                             z, 
