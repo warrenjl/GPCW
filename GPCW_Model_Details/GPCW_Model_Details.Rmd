@@ -7,11 +7,11 @@ output:
 # GPCW: Gaussian Process Model for Critical Window Estimation
 
 ## Statistical Model
-$$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left(p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right),\ i=1,...,n;$$
+$$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left\{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right\},\ i=1,...,n;$$
 
-$$\log\left(\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right) = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);$$
+$$\log\left\{\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right\} = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);$$
 
-$$\boldsymbol{\theta}=\left(\theta\left(1\right), ..., \theta\left(m\right)\right)^{\text{T}}| \sigma^2_{\theta}, \phi \sim \text{MVN}\left(\boldsymbol{0}_m, \sigma^2_{\theta}\Sigma\left(\phi\right)\right);$$
+$$\boldsymbol{\theta}=\left\{\theta\left(1\right), ..., \theta\left(m\right)\right\}^{\text{T}}| \sigma^2_{\theta}, \phi \sim \text{MVN}\left\{\boldsymbol{0}_m, \sigma^2_{\theta}\Sigma\left(\phi\right)\right\};$$
 
 $$\Sigma\left(\phi\right)_{ij} = \exp\left\{-\phi |i-j|\right\},\ \phi > 0.$$
 
@@ -32,7 +32,7 @@ $\sigma^2_{\theta} \sim \text{Inverse Gamma}\left(a_{\sigma^2_{\theta}}, b_{\sig
 
 $\phi \sim \text{Uniform}\left(a_{\phi}, b_{\phi}\right);$
 
-* Default setting: $a_{\phi} = \log(0.9999)/(-(m-1))$, $b_{\phi} = \log(0.0001)/(-1).$
+* Default setting: $a_{\phi} = \log(0.9999)/\left\{-(m-1)\right\}$, $b_{\phi} = \log(0.0001)/(-1).$
 
 ## Default Initial Values
 * $\beta_j = 0$ for all $j$;
