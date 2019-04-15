@@ -7,7 +7,7 @@ output:
 # GPCW: Gaussian Process Model for Critical Window Estimation
 
 ## Statistical Model
-$$y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left\{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right\},\ i=1,...,n;$$
+$$Y_i|\boldsymbol{\beta}, \boldsymbol{\theta} \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left\{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)\right\},\ i=1,...,n;$$
 
 $$\log\left\{\frac{p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}{1 - p_i\left(\boldsymbol{\beta}, \boldsymbol{\theta}\right)}\right\} = \textbf{x}_i^{\text{T}} \boldsymbol{\beta} + \sum_{j=1}^{m_i} \text{z}_{ij} \theta\left(j\right);$$
 
