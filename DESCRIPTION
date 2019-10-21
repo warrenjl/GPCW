@@ -4,8 +4,8 @@ Title: Gaussian Process Model for Critical Window Estimation
 Version: 1.0
 Date: 2018-10-16
 Author: Joshua L. Warren
-Maintainer: Joshua L. Warren <joshua.warren@yale.edu>
-Description: Information
-License: NA
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
 Imports: Rcpp (>= 0.12.19)
 LinkingTo: Rcpp, RcppArmadillo
