@@ -67,7 +67,8 @@ y<-rbinom(n=n,
 ```{r echo=TRUE}
 results<-GPCW(mcmc_samples = 10000,
               y = y, x = x, z = z,
-              metrop_var_phi_trans = 1.15)
+              metrop_var_phi_trans = 1.15,
+              likelihood_indicator = 0)
 ```
 
 [3]  Analyzing Output:
