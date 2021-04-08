@@ -50,5 +50,9 @@ $Y_i|\boldsymbol{\beta}, \boldsymbol{\theta}, \sigma^2_{\epsilon} \stackrel{\tex
 
 * Default setting: $a_{\sigma^2_{\epsilon}} = 0.01$, $b_{\sigma^2_{\epsilon}} = 0.01$; 
 
-* Default initial value: $\sigma^2_{\epsilon} = 1.00$
+* Default initial value: $\sigma^2_{\epsilon} = 1.00$;
+
+* likelihood_indicator $= 0$: Bernoulli; 
+
+* likelihood_indicator $= 1$: Gaussian.
 
