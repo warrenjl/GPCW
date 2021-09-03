@@ -6,12 +6,12 @@ using namespace Rcpp;
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::export]]
 
-Rcpp::List phi_update(double phi_old,
-                      double sigma2_theta,
-                      arma::vec theta,
-                      Rcpp::List temporal_corr_info,
-                      double a_phi,
+Rcpp::List phi_update(double a_phi,
                       double b_phi,
+                      Rcpp::List temporal_corr_info,
+                      arma::vec theta,
+                      double sigma2_theta,
+                      double phi_old,
                       double metrop_var_phi_trans,
                       int acctot_phi_trans){
 

@@ -166,12 +166,12 @@ for(int j = 1; j < mcmc_samples; ++j){
                                         temporal_corr_info(0));
   
   //phi Update
-  Rcpp::List phi_output = phi_update(phi(j-1),
-                                     sigma2_theta(j),
-                                     theta.col(j),
-                                     temporal_corr_info,
-                                     a_phi,
+  Rcpp::List phi_output = phi_update(a_phi,
                                      b_phi,
+                                     temporal_corr_info,
+                                     theta.col(j),
+                                     sigma2_theta(j),
+                                     phi(j-1),
                                      metrop_var_phi_trans,
                                      acctot_phi_trans);
 
