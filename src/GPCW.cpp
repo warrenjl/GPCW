@@ -97,7 +97,8 @@ if(phi_init.isNotNull()){
   phi(0) = Rcpp::as<double>(phi_init);
   }
 
-Rcpp::List temporal_corr_info = temporal_corr_fun(p_z, phi(0));
+Rcpp::List temporal_corr_info = temporal_corr_fun(p_z, 
+                                                  phi(0));
 neg_two_loglike(0) = neg_two_loglike_update(y,
                                             x,
                                             z, 
