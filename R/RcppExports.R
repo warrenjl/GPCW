@@ -13,8 +13,8 @@ neg_two_loglike_update <- function(y, x, z, likelihood_indicator, sigma2_epsilon
     .Call(`_GPCW_neg_two_loglike_update`, y, x, z, likelihood_indicator, sigma2_epsilon, beta, theta)
 }
 
-phi_update <- function(phi_old, sigma2_theta, theta, temporal_corr_info, a_phi, b_phi, metrop_var_phi_trans, acctot_phi_trans) {
-    .Call(`_GPCW_phi_update`, phi_old, sigma2_theta, theta, temporal_corr_info, a_phi, b_phi, metrop_var_phi_trans, acctot_phi_trans)
+phi_update <- function(a_phi, b_phi, temporal_corr_info, theta, sigma2_theta, phi_old, metrop_var_phi_trans, acctot_phi_trans) {
+    .Call(`_GPCW_phi_update`, a_phi, b_phi, temporal_corr_info, theta, sigma2_theta, phi_old, metrop_var_phi_trans, acctot_phi_trans)
 }
 
 rcpp_pgdraw <- function(b, c) {
