@@ -118,11 +118,11 @@ for(int j = 1; j < mcmc_samples; ++j){
   if(likelihood_indicator == 1){
   
     //sigma2_epsilon Update
-    sigma2_epsilon(j) = sigma2_epsilon_update(a_sigma2_epsilon,
-                                              b_sigma2_epsilon,
-                                              y,
+    sigma2_epsilon(j) = sigma2_epsilon_update(y,
                                               x,
                                               z,
+                                              a_sigma2_epsilon,
+                                              b_sigma2_epsilon,
                                               beta.col(j-1),
                                               theta.col(j-1));
     w.fill(1.00/sigma2_epsilon(j));

@@ -7,11 +7,11 @@ arma::vec rcpp_pgdraw(double b,
 Rcpp::List temporal_corr_fun(int p_z,
                              double phi);
 
-double sigma2_epsilon_update(double a_sigma2_epsilon,
-                             double b_sigma2_epsilon,
-                             arma::vec y,
+double sigma2_epsilon_update(arma::vec y,
                              arma::mat x,
                              arma::mat z,
+                             double a_sigma2_epsilon,
+                             double b_sigma2_epsilon,
                              arma::vec beta_old,
                              arma::vec theta_old);
 
