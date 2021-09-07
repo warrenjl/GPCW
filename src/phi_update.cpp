@@ -37,7 +37,7 @@ arma::mat corr_inv = temporal_corr_info[0];
 double log_deter = temporal_corr_info[1];
 
 double first = -0.50*log_deter - 
-               (1/sigma2_theta)*0.50*dot(theta, (corr_inv*theta)) + 
+               (1.00/sigma2_theta)*0.50*dot(theta, (corr_inv*theta)) + 
                phi_trans -
                2.00*log(1.00 + exp(phi_trans));
 
@@ -45,9 +45,11 @@ double first = -0.50*log_deter -
 double ratio = exp(first - second);   
 double acc = 1;
 if(ratio < R::runif(0.00, 1.00)){
+  
   phi = phi_old;
   temporal_corr_info = temporal_corr_info_old;
   acc = 0;
+  
   }
 acctot_phi_trans = acctot_phi_trans + 
                    acc;
