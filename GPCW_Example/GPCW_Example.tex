@@ -1,0 +1,280 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\hypertarget{gpcw-gaussian-process-model-for-critical-window-estimation}{%
+\section{GPCW: Gaussian Process Model for Critical Window
+Estimation}\label{gpcw-gaussian-process-model-for-critical-window-estimation}}
+
+\hypertarget{gpcw_example}{%
+\subsection{GPCW\_Example}\label{gpcw_example}}
+
+{[}1{]} Simulate data from the proposed model:
+
+\begin{itemize}
+\tightlist
+\item
+  Setting the reproducibility seed and initializing packages for data
+  simulation:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{8453}\NormalTok{)}
+
+\FunctionTok{library}\NormalTok{(GPCW)  }
+\FunctionTok{library}\NormalTok{(mnormt)  }\CommentTok{\#Multivariate normal distribution}
+\FunctionTok{library}\NormalTok{(boot)  }\CommentTok{\#Inverse logit transformation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Setting the global data values:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{5000}  \CommentTok{\#Sample size}
+\NormalTok{m}\OtherTok{\textless{}{-}}\DecValTok{36}  \CommentTok{\#Number of exposure time periods}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+          \AttributeTok{nrow=}\NormalTok{n, }
+          \AttributeTok{ncol=}\DecValTok{1}\NormalTok{)  }\CommentTok{\#Covariate design matrix}
+\NormalTok{z}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n=}\NormalTok{(n}\SpecialCharTok{*}\NormalTok{m)), }
+          \AttributeTok{nrow=}\NormalTok{n, }
+          \AttributeTok{ncol=}\NormalTok{m)  }\CommentTok{\#Exposure design matrix}
+
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m)\{}
+\NormalTok{   z[,j]}\OtherTok{\textless{}{-}}\NormalTok{(z[,j] }\SpecialCharTok{{-}} \FunctionTok{median}\NormalTok{(z[,j]))}\SpecialCharTok{/}\FunctionTok{IQR}\NormalTok{(z[,j])  }\CommentTok{\#Data standardization (interquartile range)}
+\NormalTok{   \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Setting the values for the statistical model parameters:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beta\_true}\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FloatTok{0.30}
+\NormalTok{sigma2\_theta\_true}\OtherTok{\textless{}{-}}\FloatTok{0.50}
+\NormalTok{phi\_true}\OtherTok{\textless{}{-}}\FloatTok{0.01}
+\NormalTok{Sigma\_true}\OtherTok{\textless{}{-}}\NormalTok{sigma2\_theta\_true}\SpecialCharTok{*}\FunctionTok{chol2inv}\NormalTok{(}\FunctionTok{chol}\NormalTok{(}\FunctionTok{temporal\_corr\_fun}\NormalTok{(m, }
+\NormalTok{                                                              phi\_true)[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{theta\_true}\OtherTok{\textless{}{-}}\FunctionTok{rmnorm}\NormalTok{(}\AttributeTok{n=}\DecValTok{1}\NormalTok{, }
+                   \AttributeTok{mean=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\AttributeTok{times=}\NormalTok{m), }
+                   \AttributeTok{varcov=}\NormalTok{Sigma\_true)}
+\NormalTok{theta\_true}\OtherTok{\textless{}{-}}\NormalTok{theta\_true }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(theta\_true)}
+\NormalTok{logit\_p\_true}\OtherTok{\textless{}{-}}\NormalTok{x}\SpecialCharTok{\%*\%}\NormalTok{beta\_true }\SpecialCharTok{+} 
+\NormalTok{              z}\SpecialCharTok{\%*\%}\NormalTok{theta\_true}
+\NormalTok{probs\_true}\OtherTok{\textless{}{-}}\FunctionTok{inv.logit}\NormalTok{(logit\_p\_true)}
+\FunctionTok{hist}\NormalTok{(probs\_true)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{GPCW_Example_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Simulating the analysis dataset:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}\OtherTok{\textless{}{-}}\FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n=}\NormalTok{n, }
+          \AttributeTok{size=}\DecValTok{1}\NormalTok{, }
+          \AttributeTok{prob=}\NormalTok{probs\_true)}
+\end{Highlighting}
+\end{Shaded}
+
+{[}2{]} Fit GPCW to estimate critical windows of susceptibility:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results}\OtherTok{\textless{}{-}}\FunctionTok{GPCW}\NormalTok{(}\AttributeTok{mcmc\_samples =} \DecValTok{10000}\NormalTok{,}
+              \AttributeTok{y =}\NormalTok{ y, }\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{z =}\NormalTok{ z,}
+              \AttributeTok{metrop\_var\_phi\_trans =} \FloatTok{1.15}\NormalTok{,}
+              \AttributeTok{likelihood\_indicator =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Progress: 10%
+## phi Acceptance: 30%
+## *******************
+## Progress: 20%
+## phi Acceptance: 29%
+## *******************
+## Progress: 30%
+## phi Acceptance: 29%
+## *******************
+## Progress: 40%
+## phi Acceptance: 28%
+## *******************
+## Progress: 50%
+## phi Acceptance: 28%
+## *******************
+## Progress: 60%
+## phi Acceptance: 28%
+## *******************
+## Progress: 70%
+## phi Acceptance: 28%
+## *******************
+## Progress: 80%
+## phi Acceptance: 28%
+## *******************
+## Progress: 90%
+## phi Acceptance: 28%
+## *******************
+## Progress: 100%
+## phi Acceptance: 28%
+## *******************
+\end{verbatim}
+
+{[}3{]} Analyzing Output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(results}\SpecialCharTok{$}\NormalTok{beta[}\DecValTok{1}\NormalTok{, }\DecValTok{1001}\SpecialCharTok{:}\DecValTok{10000}\NormalTok{], }
+     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"beta"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Sample"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\NormalTok{beta\_true,}
+       \AttributeTok{col=}\StringTok{"red"}\NormalTok{,}
+       \AttributeTok{lwd=}\DecValTok{2}\NormalTok{)  }\CommentTok{\#True value}
+\FunctionTok{plot}\NormalTok{(results}\SpecialCharTok{$}\NormalTok{sigma2\_theta[}\DecValTok{1001}\SpecialCharTok{:}\DecValTok{10000}\NormalTok{],}
+     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"sigma2\_theta"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Sample"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\NormalTok{sigma2\_theta\_true,}
+       \AttributeTok{col=}\StringTok{"red"}\NormalTok{,}
+       \AttributeTok{lwd=}\DecValTok{2}\NormalTok{)  }\CommentTok{\#True value}
+\FunctionTok{plot}\NormalTok{(results}\SpecialCharTok{$}\NormalTok{phi[}\DecValTok{1001}\SpecialCharTok{:}\DecValTok{10000}\NormalTok{],}
+     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"phi"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Sample"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\NormalTok{phi\_true, }
+       \AttributeTok{col=}\StringTok{"red"}\NormalTok{,}
+       \AttributeTok{lwd=}\DecValTok{2}\NormalTok{)  }\CommentTok{\#True value}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{rowMeans}\NormalTok{(results}\SpecialCharTok{$}\NormalTok{theta[,}\DecValTok{1001}\SpecialCharTok{:}\DecValTok{10000}\NormalTok{]), }
+     \AttributeTok{pch=}\DecValTok{16}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"theta"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Time"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(theta\_true, }
+       \AttributeTok{pch=}\DecValTok{16}\NormalTok{, }
+       \AttributeTok{col=}\StringTok{"red"}\NormalTok{)  }\CommentTok{\#True values}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{GPCW_Example_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\end{document}

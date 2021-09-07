@@ -21,8 +21,8 @@ rcpp_pgdraw <- function(b, c) {
     .Call(`_GPCW_rcpp_pgdraw`, b, c)
 }
 
-sigma2_epsilon_update <- function(a_sigma2_epsilon, b_sigma2_epsilon, y, x, z, beta_old, theta_old) {
-    .Call(`_GPCW_sigma2_epsilon_update`, a_sigma2_epsilon, b_sigma2_epsilon, y, x, z, beta_old, theta_old)
+sigma2_epsilon_update <- function(y, x, z, a_sigma2_epsilon, b_sigma2_epsilon, beta_old, theta_old) {
+    .Call(`_GPCW_sigma2_epsilon_update`, y, x, z, a_sigma2_epsilon, b_sigma2_epsilon, beta_old, theta_old)
 }
 
 sigma2_theta_update <- function(a_sigma2_theta, b_sigma2_theta, theta, corr_inv) {

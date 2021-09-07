@@ -18,8 +18,8 @@ double a_sigma2_theta_update = 0.50*p_z +
 double b_sigma2_theta_update = 0.50*dot(theta, ((corr_inv)*theta)) + 
                                b_sigma2_theta;
 
-double sigma2_theta = 1/R::rgamma(a_sigma2_theta_update,
-                                  (1.00/b_sigma2_theta_update));
+double sigma2_theta = 1.00/R::rgamma(a_sigma2_theta_update,
+                                     (1.00/b_sigma2_theta_update));
 
 return(sigma2_theta);
 

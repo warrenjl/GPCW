@@ -194,11 +194,13 @@ for(int j = 1; j < mcmc_samples; ++j){
     }
   
   if(((j + 1) % int(round(mcmc_samples*0.10)) == 0)){
+    
     double completion = round(100*((j + 1)/(double)mcmc_samples));
     Rcpp::Rcout << "Progress: " << completion << "%" << std::endl;
     double accrate_phi_trans = round(100*(acctot_phi_trans/(double)j));
     Rcpp::Rcout << "phi Acceptance: " << accrate_phi_trans << "%" << std::endl;
     Rcpp::Rcout << "*******************" << std::endl;
+    
     }
   
   }
