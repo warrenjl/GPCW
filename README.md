@@ -4,6 +4,4 @@ This package implements a hierarchical Bayesian logistic regression analysis to 
 
 # References
 * Warren JL, Fuentes M, Herring AH, and Langlois PH (2012). Spatial-temporal modeling of the association between air pollution exposure and preterm birth: identifying critical windows of exposure. Biometrics, 68(4):1157-1167. (Winner of 2012 Best Paper in Biometrics Award).
-
-* Warren JL, Fuentes M, Herring AH, and Langlois PH (2013). Air pollution metric analysis while determining susceptible periods of pregnancy for low birth weight. ISRN Obstetrics and Gynecology, 2013:387452.
-
+* https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1541-0420.2012.01774.x
