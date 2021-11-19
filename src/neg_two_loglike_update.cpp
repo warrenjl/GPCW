@@ -10,6 +10,7 @@ double neg_two_loglike_update(arma::vec y,
                               arma::mat x,
                               arma::mat z, 
                               int likelihood_indicator,
+                              int r,
                               double sigma2_epsilon,
                               arma::vec beta,
                               arma::vec theta){
@@ -29,6 +30,7 @@ if(likelihood_indicator == 0){
                          probs(j),
                          TRUE);
      }
+  
   }
 
 if(likelihood_indicator == 1){
@@ -38,6 +40,18 @@ if(likelihood_indicator == 1){
                         sqrt(sigma2_epsilon),
                         TRUE);
      }
+  }
+
+if(likelihood_indicator == 2){
+  
+  arma::vec probs = exp(mu)/(1.00 + exp(mu));
+  for(int j = 0; j < n; ++j){
+     dens(j) = R::dnbinom(y(j), 
+                          r, 
+                          (1.00 - probs(j)),        
+                          TRUE);
+     }
+  
   }
 
 double neg_two_loglike = -2.00*sum(dens);

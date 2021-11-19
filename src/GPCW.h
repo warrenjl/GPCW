@@ -4,8 +4,21 @@
 arma::vec rcpp_pgdraw(arma::vec b, 
                       arma::vec c);
 
+Rcpp::NumericVector sampleRcpp(Rcpp::NumericVector x,
+                               int size,
+                               bool replace,
+                               Rcpp::NumericVector prob = Rcpp::NumericVector::create());
+
 Rcpp::List temporal_corr_fun(int p_z,
                              double phi);
+
+int r_update(arma::vec y,
+             arma::mat x,
+             arma::mat z,
+             int a_r,
+             int b_r,
+             arma::vec beta_old,
+             arma::vec theta_old);
 
 double sigma2_epsilon_update(arma::vec y,
                              arma::mat x,
@@ -18,6 +31,8 @@ double sigma2_epsilon_update(arma::vec y,
 Rcpp::List w_update(arma::vec y,
                     arma::mat x,
                     arma::mat z,
+                    int likelihood_indicator,
+                    int r,
                     arma::vec beta_old,
                     arma::vec theta_old);
 
@@ -54,6 +69,7 @@ double neg_two_loglike_update(arma::vec y,
                               arma::mat x,
                               arma::mat z,
                               int likelihood_indicator,
+                              int r,
                               double sigma2_epsilon,
                               arma::vec beta,
                               arma::vec theta);
@@ -64,6 +80,8 @@ Rcpp::List GPCW(int mcmc_samples,
                 arma::mat z,
                 double metrop_var_phi_trans,
                 int likelihood_indicator,
+                Rcpp::Nullable<double> a_r_prior,
+                Rcpp::Nullable<double> b_r_prior,
                 Rcpp::Nullable<double> a_sigma2_epsilon_prior,
                 Rcpp::Nullable<double> b_sigma2_epsilon_prior,
                 Rcpp::Nullable<double> sigma2_beta_prior,
@@ -71,6 +89,7 @@ Rcpp::List GPCW(int mcmc_samples,
                 Rcpp::Nullable<double> b_sigma2_theta_prior,
                 Rcpp::Nullable<double> a_phi_prior,
                 Rcpp::Nullable<double> b_phi_prior,
+                Rcpp::Nullable<double> r_init,
                 Rcpp::Nullable<double> sigma2_epsilon_init,
                 Rcpp::Nullable<Rcpp::NumericVector> beta_init,
                 Rcpp::Nullable<Rcpp::NumericVector> theta_init,

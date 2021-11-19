@@ -9,17 +9,37 @@ using namespace Rcpp;
 Rcpp::List w_update(arma::vec y,
                     arma::mat x,
                     arma::mat z,
+                    int likelihood_indicator,
+                    int r,
                     arma::vec beta_old,
                     arma::vec theta_old){
 
+int n = y.size();
+  
 arma::vec mean_w = x*beta_old + 
                    z*theta_old;
 
-arma::vec input(1); input.fill(1.00);
-arma::vec w = rcpp_pgdraw(input,
-                          mean_w);
+arma::vec input0(1); input0.fill(1.00);
+arma::vec input2 = (r + y);
 
-arma::vec gamma = (y - 0.50)/w;
+arma::vec w(n); w.fill(0.00);
+arma::vec gamma(n); gamma.fill(0.00);
+
+if(likelihood_indicator == 0){
+
+  w = rcpp_pgdraw(input0,
+                  mean_w);
+  gamma = (y - 0.50)/w;
+  
+  } 
+
+if(likelihood_indicator == 2){
+  
+  w = rcpp_pgdraw(input2,
+                  mean_w);
+  gamma = 0.50*(y - r)/w;
+
+  }
 
 return Rcpp::List::create(Rcpp::Named("w") = w,
                           Rcpp::Named("gamma") = gamma);
