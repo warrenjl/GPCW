@@ -12,6 +12,7 @@ Rcpp::List GPCW(int mcmc_samples,
                 arma::mat z,
                 double metrop_var_phi_trans,
                 int likelihood_indicator,
+                Rcpp::Nullable<Rcpp::NumericVector> offset = R_NilValue,
                 Rcpp::Nullable<double> a_r_prior = R_NilValue,
                 Rcpp::Nullable<double> b_r_prior = R_NilValue,
                 Rcpp::Nullable<double> a_sigma2_epsilon_prior = R_NilValue,
@@ -29,6 +30,7 @@ Rcpp::List GPCW(int mcmc_samples,
                 Rcpp::Nullable<double> phi_init = R_NilValue){
 
 //Defining Parameters and Quantities of Interest
+int n = y.size();
 int p_x = x.n_cols;
 int p_z = z.n_cols;
 arma::vec r(mcmc_samples); r.fill(0.00);
@@ -38,6 +40,11 @@ arma::mat theta(p_z, mcmc_samples); theta.fill(0.00);
 arma::vec sigma2_theta(mcmc_samples); sigma2_theta.fill(0.00);
 arma::vec phi(mcmc_samples); phi.fill(0.00);
 arma::vec neg_two_loglike(mcmc_samples); neg_two_loglike.fill(0.00);
+
+arma::vec off_set(n); off_set.fill(0.00);
+if(offset.isNotNull()){
+  off_set = Rcpp::as<arma::vec>(offset);
+  }
 
 //Prior Information
 int a_r = 1;
@@ -121,6 +128,7 @@ Rcpp::List temporal_corr_info = temporal_corr_fun(p_z,
 neg_two_loglike(0) = neg_two_loglike_update(y,
                                             x,
                                             z, 
+                                            off_set,
                                             likelihood_indicator,
                                             r(0),
                                             sigma2_epsilon(0),
@@ -141,6 +149,7 @@ for(int j = 1; j < mcmc_samples; ++j){
      r(j) = r_update(y,
                      x,
                      z,
+                     off_set,
                      a_r,
                      b_r,
                      beta.col(j-1),
@@ -150,6 +159,7 @@ for(int j = 1; j < mcmc_samples; ++j){
      Rcpp::List w_output = w_update(y,
                                     x,
                                     z,
+                                    off_set,
                                     likelihood_indicator,
                                     r(j),
                                     beta.col(j-1),
@@ -179,6 +189,7 @@ for(int j = 1; j < mcmc_samples; ++j){
      Rcpp::List w_output = w_update(y,
                                     x,
                                     z,
+                                    off_set,
                                     likelihood_indicator,
                                     r(j),
                                     beta.col(j-1),
@@ -191,6 +202,7 @@ for(int j = 1; j < mcmc_samples; ++j){
    //beta Update
    beta.col(j) = beta_update(x, 
                              z,
+                             off_set,
                              sigma2_beta,
                              w,
                              gamma,
@@ -199,6 +211,7 @@ for(int j = 1; j < mcmc_samples; ++j){
    //theta Update
    theta.col(j) = theta_update(x, 
                                z,
+                               off_set,
                                w,
                                gamma,
                                beta.col(j),
@@ -229,6 +242,7 @@ for(int j = 1; j < mcmc_samples; ++j){
    neg_two_loglike(j) = neg_two_loglike_update(y,
                                                x,
                                                z, 
+                                               off_set,
                                                likelihood_indicator,
                                                r(j),
                                                sigma2_epsilon(j),

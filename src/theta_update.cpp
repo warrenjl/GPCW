@@ -8,6 +8,7 @@ using namespace Rcpp;
 
 arma::vec theta_update(arma::mat x, 
                        arma::mat z,
+                       arma::vec off_set,
                        arma::vec w,
                        arma::vec gamma,
                        arma::vec beta,
@@ -26,7 +27,7 @@ arma::mat z_trans = trans(z);
 arma::mat cov_theta = inv_sympd(z_trans*(w_mat%z) + 
                                 (1/sigma2_theta_old)*corr_inv);
 
-arma::vec mean_theta = cov_theta*(z_trans*(w%(gamma - x*beta)));
+arma::vec mean_theta = cov_theta*(z_trans*(w%(gamma - off_set - x*beta)));
 
 arma::mat ind_norms = arma::randn(1, p_z);
 arma::vec theta = mean_theta + 

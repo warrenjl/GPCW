@@ -8,7 +8,8 @@ using namespace Rcpp;
 
 double neg_two_loglike_update(arma::vec y,
                               arma::mat x,
-                              arma::mat z, 
+                              arma::mat z,
+                              arma::vec off_set,
                               int likelihood_indicator,
                               int r,
                               double sigma2_epsilon,
@@ -18,7 +19,8 @@ double neg_two_loglike_update(arma::vec y,
 int n = y.size();
 arma::vec dens(n); dens.fill(0.00);
 
-arma::vec mu = x*beta + 
+arma::vec mu = off_set +
+               x*beta + 
                z*theta;
 
 if(likelihood_indicator == 0){

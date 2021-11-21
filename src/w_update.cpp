@@ -9,6 +9,7 @@ using namespace Rcpp;
 Rcpp::List w_update(arma::vec y,
                     arma::mat x,
                     arma::mat z,
+                    arma::vec off_set,
                     int likelihood_indicator,
                     int r,
                     arma::vec beta_old,
@@ -16,7 +17,8 @@ Rcpp::List w_update(arma::vec y,
 
 int n = y.size();
   
-arma::vec mean_w = x*beta_old + 
+arma::vec mean_w = off_set +
+                   x*beta_old + 
                    z*theta_old;
 
 arma::vec input0(1); input0.fill(1.00);

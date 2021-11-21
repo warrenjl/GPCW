@@ -9,6 +9,7 @@ using namespace Rcpp;
 int r_update(arma::vec y,
              arma::mat x,
              arma::mat z,
+             arma::vec off_set,
              int a_r,
              int b_r,
              arma::vec beta_old,
@@ -16,7 +17,8 @@ int r_update(arma::vec y,
 
 int n = y.size();
    
-arma::vec mu = x*beta_old +
+arma::vec mu = off_set +
+               x*beta_old +
                x*theta_old;
   
 arma::vec prob = 1.00/(1.00 + exp(-mu));
