@@ -19,7 +19,7 @@ int n = y.size();
    
 arma::vec mu = off_set +
                x*beta_old +
-               x*theta_old;
+               z*theta_old;
   
 arma::vec prob = 1.00/(1.00 + exp(-mu));
   
