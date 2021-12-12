@@ -52,7 +52,7 @@ if(a_r_prior.isNotNull()){
   a_r = Rcpp::as<int>(a_r_prior);
   }
 
-int b_r = 50;
+int b_r = 100;
 if(b_r_prior.isNotNull()){
   b_r = Rcpp::as<int>(b_r_prior);
   }
@@ -93,7 +93,7 @@ if(b_phi_prior.isNotNull()){
   }
 
 //Initial Values
-r(0) = a_r;
+r(0) = b_r;
 if(r_init.isNotNull()){
   r(0) = Rcpp::as<int>(r_init);
   }
@@ -141,33 +141,22 @@ int acctot_phi_trans = 0;
 //Main Sampling Loop
 arma::vec w(y.size()); w.fill(0.00);
 arma::vec gamma = y;
-for(int j = 1; j < mcmc_samples; ++j){
+if(likelihood_indicator == 2){
+
+  Rcpp::List w_output = w_update(y,
+                                 x,
+                                 z,
+                                 off_set,
+                                 likelihood_indicator,
+                                 r(0),
+                                 beta.col(0),
+                                 theta.col(0));
+  w = Rcpp::as<arma::vec>(w_output[0]);
+  gamma = Rcpp::as<arma::vec>(w_output[1]);
   
-   if(likelihood_indicator == 2){
-    
-     //r Update
-     r(j) = r_update(y,
-                     x,
-                     z,
-                     off_set,
-                     a_r,
-                     b_r,
-                     beta.col(j-1),
-                     theta.col(j-1));
-     
-     //w Update
-     Rcpp::List w_output = w_update(y,
-                                    x,
-                                    z,
-                                    off_set,
-                                    likelihood_indicator,
-                                    r(j),
-                                    beta.col(j-1),
-                                    theta.col(j-1));
-     w = Rcpp::as<arma::vec>(w_output[0]);
-     gamma = Rcpp::as<arma::vec>(w_output[1]);
-     
-     } 
+  }
+
+for(int j = 1; j < mcmc_samples; ++j){
   
    if(likelihood_indicator == 1){
   
@@ -191,7 +180,7 @@ for(int j = 1; j < mcmc_samples; ++j){
                                     z,
                                     off_set,
                                     likelihood_indicator,
-                                    r(j),
+                                    r(j-1),
                                     beta.col(j-1),
                                     theta.col(j-1));
      w = Rcpp::as<arma::vec>(w_output[0]);
@@ -237,6 +226,32 @@ for(int j = 1; j < mcmc_samples; ++j){
    phi(j) = Rcpp::as<double>(phi_output[0]);
    acctot_phi_trans = phi_output[1];
    temporal_corr_info = phi_output[2];
+   
+   if(likelihood_indicator == 2){
+     
+     //r Update
+     r(j) = r_update(y,
+                     x,
+                     z,
+                     off_set,
+                     a_r,
+                     b_r,
+                     beta.col(j),
+                     theta.col(j));
+     
+     //w Update
+     Rcpp::List w_output = w_update(y,
+                                    x,
+                                    z,
+                                    off_set,
+                                    likelihood_indicator,
+                                    r(j),
+                                    beta.col(j),
+                                    theta.col(j));
+     w = Rcpp::as<arma::vec>(w_output[0]);
+     gamma = Rcpp::as<arma::vec>(w_output[1]);
+     
+     }
 
    //neg_two_loglike Update
    neg_two_loglike(j) = neg_two_loglike_update(y,
@@ -266,12 +281,12 @@ for(int j = 1; j < mcmc_samples; ++j){
   
    }
                                   
-return Rcpp::List::create(Rcpp::Named("r") = r,
-                          Rcpp::Named("sigma2_epsilon") = sigma2_epsilon,
+return Rcpp::List::create(Rcpp::Named("sigma2_epsilon") = sigma2_epsilon,
                           Rcpp::Named("beta") = beta,
                           Rcpp::Named("theta") = theta,
                           Rcpp::Named("sigma2_theta") = sigma2_theta,
                           Rcpp::Named("phi") = phi,
+                          Rcpp::Named("r") = r,
                           Rcpp::Named("neg_two_loglike") = neg_two_loglike,
                           Rcpp::Named("acctot_phi_trans") = acctot_phi_trans);
 
