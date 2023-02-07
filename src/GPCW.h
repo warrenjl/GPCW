@@ -18,8 +18,8 @@ int r_update(arma::vec y,
              arma::vec off_set,
              int a_r,
              int b_r,
-             arma::vec beta_old,
-             arma::vec theta_old);
+             arma::vec beta,
+             arma::vec theta);
 
 double sigma2_epsilon_update(arma::vec y,
                              arma::mat x,
