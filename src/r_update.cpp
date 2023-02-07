@@ -12,14 +12,14 @@ int r_update(arma::vec y,
              arma::vec off_set,
              int a_r,
              int b_r,
-             arma::vec beta_old,
-             arma::vec theta_old){
+             arma::vec beta,
+             arma::vec theta){
 
 int n = y.size();
    
 arma::vec mu = off_set +
-               x*beta_old +
-               z*theta_old;
+               x*beta +
+               z*theta;
   
 arma::vec prob = 1.00/(1.00 + exp(-mu));
   

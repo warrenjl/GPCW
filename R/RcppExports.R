@@ -17,8 +17,8 @@ phi_update <- function(a_phi, b_phi, temporal_corr_info, theta, sigma2_theta, ph
     .Call(`_GPCW_phi_update`, a_phi, b_phi, temporal_corr_info, theta, sigma2_theta, phi_old, metrop_var_phi_trans, acctot_phi_trans)
 }
 
-r_update <- function(y, x, z, off_set, a_r, b_r, beta_old, theta_old) {
-    .Call(`_GPCW_r_update`, y, x, z, off_set, a_r, b_r, beta_old, theta_old)
+r_update <- function(y, x, z, off_set, a_r, b_r, beta, theta) {
+    .Call(`_GPCW_r_update`, y, x, z, off_set, a_r, b_r, beta, theta)
 }
 
 rcpp_pgdraw <- function(b, c) {

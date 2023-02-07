@@ -98,8 +98,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // r_update
-int r_update(arma::vec y, arma::mat x, arma::mat z, arma::vec off_set, int a_r, int b_r, arma::vec beta_old, arma::vec theta_old);
-RcppExport SEXP _GPCW_r_update(SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP off_setSEXP, SEXP a_rSEXP, SEXP b_rSEXP, SEXP beta_oldSEXP, SEXP theta_oldSEXP) {
+int r_update(arma::vec y, arma::mat x, arma::mat z, arma::vec off_set, int a_r, int b_r, arma::vec beta, arma::vec theta);
+RcppExport SEXP _GPCW_r_update(SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP off_setSEXP, SEXP a_rSEXP, SEXP b_rSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -109,9 +109,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type off_set(off_setSEXP);
     Rcpp::traits::input_parameter< int >::type a_r(a_rSEXP);
     Rcpp::traits::input_parameter< int >::type b_r(b_rSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type beta_old(beta_oldSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type theta_old(theta_oldSEXP);
-    rcpp_result_gen = Rcpp::wrap(r_update(y, x, z, off_set, a_r, b_r, beta_old, theta_old));
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(r_update(y, x, z, off_set, a_r, b_r, beta, theta));
     return rcpp_result_gen;
 END_RCPP
 }
