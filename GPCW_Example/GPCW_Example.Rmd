@@ -53,12 +53,13 @@ logit_p_true<-x%*%beta_true +
               z%*%theta_true
 probs_true<-inv.logit(logit_p_true)
 hist(probs_true)
+trials<-rep(1, times=n)
 ```
 
 * Simulating the analysis dataset:
 ```{r}
 y<-rbinom(n=n, 
-          size=1, 
+          size=trials, 
           prob=probs_true)
 ```
 
@@ -68,6 +69,7 @@ y<-rbinom(n=n,
 results<-GPCW(mcmc_samples = 10000,
               y = y, x = x, z = z,
               metrop_var_phi_trans = 1.15,
+              trials = trials,
               likelihood_indicator = 0)
 ```
 
