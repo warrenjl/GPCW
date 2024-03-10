@@ -9,8 +9,8 @@ beta_update <- function(x, z, off_set, sigma2_beta, w, gamma, theta_old) {
     .Call(`_GPCW_beta_update`, x, z, off_set, sigma2_beta, w, gamma, theta_old)
 }
 
-neg_two_loglike_update <- function(y, x, z, off_set, likelihood_indicator, r, sigma2_epsilon, beta, theta) {
-    .Call(`_GPCW_neg_two_loglike_update`, y, x, z, off_set, likelihood_indicator, r, sigma2_epsilon, beta, theta)
+neg_two_loglike_update <- function(y, x, z, off_set, tri_als, likelihood_indicator, r, sigma2_epsilon, beta, theta) {
+    .Call(`_GPCW_neg_two_loglike_update`, y, x, z, off_set, tri_als, likelihood_indicator, r, sigma2_epsilon, beta, theta)
 }
 
 phi_update <- function(a_phi, b_phi, temporal_corr_info, theta, sigma2_theta, phi_old, metrop_var_phi_trans, acctot_phi_trans) {

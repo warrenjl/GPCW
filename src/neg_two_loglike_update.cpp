@@ -10,6 +10,7 @@ double neg_two_loglike_update(arma::vec y,
                               arma::mat x,
                               arma::mat z,
                               arma::vec off_set,
+                              arma::vec tri_als,
                               int likelihood_indicator,
                               int r,
                               double sigma2_epsilon,
@@ -28,7 +29,7 @@ if(likelihood_indicator == 0){
   arma::vec probs = exp(mu)/(1.00 + exp(mu));
   for(int j = 0; j < n; ++j){
      dens(j) = R::dbinom(y(j),
-                         1,
+                         tri_als(j),
                          probs(j),
                          TRUE);
      }

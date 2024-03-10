@@ -62,8 +62,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // neg_two_loglike_update
-double neg_two_loglike_update(arma::vec y, arma::mat x, arma::mat z, arma::vec off_set, int likelihood_indicator, int r, double sigma2_epsilon, arma::vec beta, arma::vec theta);
-RcppExport SEXP _GPCW_neg_two_loglike_update(SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP off_setSEXP, SEXP likelihood_indicatorSEXP, SEXP rSEXP, SEXP sigma2_epsilonSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
+double neg_two_loglike_update(arma::vec y, arma::mat x, arma::mat z, arma::vec off_set, arma::vec tri_als, int likelihood_indicator, int r, double sigma2_epsilon, arma::vec beta, arma::vec theta);
+RcppExport SEXP _GPCW_neg_two_loglike_update(SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP off_setSEXP, SEXP tri_alsSEXP, SEXP likelihood_indicatorSEXP, SEXP rSEXP, SEXP sigma2_epsilonSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -71,12 +71,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type z(zSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type off_set(off_setSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type tri_als(tri_alsSEXP);
     Rcpp::traits::input_parameter< int >::type likelihood_indicator(likelihood_indicatorSEXP);
     Rcpp::traits::input_parameter< int >::type r(rSEXP);
     Rcpp::traits::input_parameter< double >::type sigma2_epsilon(sigma2_epsilonSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type theta(thetaSEXP);
-    rcpp_result_gen = Rcpp::wrap(neg_two_loglike_update(y, x, z, off_set, likelihood_indicator, r, sigma2_epsilon, beta, theta));
+    rcpp_result_gen = Rcpp::wrap(neg_two_loglike_update(y, x, z, off_set, tri_als, likelihood_indicator, r, sigma2_epsilon, beta, theta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -212,7 +213,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_GPCW_GPCW", (DL_FUNC) &_GPCW_GPCW, 23},
     {"_GPCW_beta_update", (DL_FUNC) &_GPCW_beta_update, 7},
-    {"_GPCW_neg_two_loglike_update", (DL_FUNC) &_GPCW_neg_two_loglike_update, 9},
+    {"_GPCW_neg_two_loglike_update", (DL_FUNC) &_GPCW_neg_two_loglike_update, 10},
     {"_GPCW_phi_update", (DL_FUNC) &_GPCW_phi_update, 8},
     {"_GPCW_r_update", (DL_FUNC) &_GPCW_r_update, 8},
     {"_GPCW_rcpp_pgdraw", (DL_FUNC) &_GPCW_rcpp_pgdraw, 2},
